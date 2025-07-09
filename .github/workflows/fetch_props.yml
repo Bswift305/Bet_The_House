@@ -1,29 +1,8 @@
-jobs:
-  fetch-props:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: List repo contents
-        run: ls -R .
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-          with:
-            node-version: '18'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run fetchOdds script
-        run: node scripts/fetchOdds.js
-
-
 name: Fetch Odds & Upsert Props
 
 on:
   schedule:
-    - cron:  '0 2 * * *'      # Runs daily at 02:00 UTC
+    - cron: '0 2 * * *'      # Runs daily at 02:00 UTC
   workflow_dispatch:        # Allows manual trigger
 
 jobs:
@@ -33,6 +12,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: List repo contents (debug)
+        run: ls -R .
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -48,7 +30,3 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         run: node scripts/fetchOdds.js
-
-       - name: List workspace
-  run: ls -R /home/runner/work/Bet_The_House/Bet_The_House 
-
