@@ -27,3 +27,7 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         run: node scripts/fetchOdds.js
+
+       - name: List workspace
+  run: ls -R /home/runner/work/Bet_The_House/Bet_The_House 
+
