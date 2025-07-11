@@ -2,8 +2,8 @@ name: Fetch Odds & Upsert Props
 
 on:
   schedule:
-    - cron: '0 2 * * *'      # Runs daily at 02:00 UTC
-  workflow_dispatch:        # Allows manual trigger
+    - cron: '0 2 * * *'
+  workflow_dispatch:
 
 jobs:
   fetch-props:
