@@ -2,7 +2,7 @@ name: Fetch Odds & Upsert Props
 
 on:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 2 * * *'      # daily at 02:00 UTC
   workflow_dispatch:
 
 jobs:
@@ -13,8 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: List repo contents (debug)
-        run: ls -R .
+      # ─── Fix casing in CI ─────────────────────────────────────
+      - name: Normalize script folder casing
+        run: |
+          if [ -d Scripts ]; then
+            mv Scripts scripts
+          fi
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -26,7 +30,7 @@ jobs:
 
       - name: Run fetchOdds script
         env:
-          NEXT_PUBLIC_SUPABASE_URL:      ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY:     ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-          ODDS_API_KEY:                  ${{ secrets.ODDS_API_KEY }}
+          NEXT_PUBLIC_SUPABASE_URL:     ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY:    ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          ODDS_API_KEY:                 ${{ secrets.ODDS_API_KEY }}
         run: node scripts/fetchOdds.js
