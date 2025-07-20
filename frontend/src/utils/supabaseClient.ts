@@ -1,6 +1,6 @@
 // frontend/src/utils/supabaseClient.ts
 
-import { createClient } from '@supabase/supabase-js';
+import createClient from '../utils/supabaseClient';
 
 // Load environment variables
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
