@@ -1,0 +1,45 @@
+// pages/index.js
+import { useEffect, useState } from 'react';
+import { supabase } from '../lib/supabaseClient';
+
+export default function Home() {
+  const [games, setGames] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadGames() {
+      const { data, error } = await supabase
+        .from('game_scripts')
+        .select('game_id, leading_10_half')
+        .eq('trailing_7_4th', true)
+        .order('game_id', { ascending: true });
+
+      if (error) console.error('Error fetching:', error);
+      else setGames(data);
+
+      setLoading(false);
+    }
+    loadGames();
+  }, []);
+
+  if (loading) return <p>Loading…</p>;
+  if (games.length === 0) return <p>No games found.</p>;
+
+  return (
+    <div style={{ padding: 20, fontFamily: 'sans-serif' }}>
+      <h1 style={{ fontSize: '1.5rem', marginBottom: 10 }}>
+        Games You Trailed by 7 in Q4
+      </h1>
+      <ul>
+        {games.map((g) => (
+          <li key={g.game_id}>
+            {g.game_id} —{' '}
+            {g.leading_10_half
+              ? 'Also led by 10 at half'
+              : 'Did not lead by 10 at half'}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
