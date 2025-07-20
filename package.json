@@ -4,11 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "serve -s build"
+  "dev": "next dev --turbopack",
+  "build": "next build",
+  "start": "next start"
   },
   "dependencies": {
+    "serve": "^14.2.0"	
     "@supabase/supabase-js": "^2.50.4",
     "dotenv": "^17.1.0",
     "next": "15.3.5",
@@ -19,7 +20,6 @@
   },
   "devDependencies": {
     "eslint": "8.0.0",
-    "eslint-config-next": "13.0.0",
-    "serve": "^14.2.4"
+    "eslint-config-next": "13.0.0",    
   }
 }
