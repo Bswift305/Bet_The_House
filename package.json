@@ -1,25 +1,21 @@
 {
-  "name": "bet_the_house",
+  "name": "betting-dashboard",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
-  "dev": "next dev --turbopack",
-  "build": "next build",
-  "start": "next start"
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
-    "serve": "^14.2.0"	
     "@supabase/supabase-js": "^2.50.4",
-    "dotenv": "^17.1.0",
-    "next": "15.3.5",
-    "node-fetch": "^2.7.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "recharts": "^3.1.0"
+    "next": "^13.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "eslint": "8.0.0",
-    "eslint-config-next": "13.0.0",    
+    "eslint": "^8.0.0",
+    "eslint-config-next": "13.0.0",
+    "typescript": "^5.0.0"
   }
 }
