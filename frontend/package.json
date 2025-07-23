@@ -54,6 +54,5 @@
   "main": "postcss.config.js",
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "type": "commonjs"
+  "license": "ISC", 
 }
