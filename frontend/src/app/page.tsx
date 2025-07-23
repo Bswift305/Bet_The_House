@@ -41,7 +41,7 @@ export default function HomePage() {
         new Set((data ?? []).map((entry: any) => entry.team_name))
       )
 
-      setTeamNames(uniqueTeams)
+      setTeamNames(uniqueTeams as string[])
       if (uniqueTeams.length > 0) {
         setSelectedTeam(uniqueTeams[0]) // Default to first team
       }
