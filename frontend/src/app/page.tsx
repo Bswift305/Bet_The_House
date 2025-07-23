@@ -30,7 +30,7 @@ export default function HomePage() {
     const fetchTeams = async () => {
       const { data, error } = await supabase
         .from('odds_history')
-        .select('team_name', { distinct: true })
+        .select('team_name')
 
       if (error) {
         console.error('Error fetching team names:', error)
@@ -38,19 +38,19 @@ export default function HomePage() {
       }
 
       const uniqueTeams = Array.from(
-        new Set((data ?? []).map((entry: any) => entry.team_name))
+        new Set((data ?? []).map((entry: { team_name: string }) => entry.team_name))
       )
 
-      setTeamNames(uniqueTeams as string[])
+      setTeamNames(uniqueTeams)
       if (uniqueTeams.length > 0) {
-        setSelectedTeam(uniqueTeams[0]) // Default to first team
+        setSelectedTeam(uniqueTeams[0])
       }
     }
 
     fetchTeams()
   }, [])
 
-  // Fetch odds when selected team changes
+  // Fetch odds data when selectedTeam changes
   useEffect(() => {
     const fetchOdds = async () => {
       if (!selectedTeam) return
@@ -79,7 +79,7 @@ export default function HomePage() {
     <div style={{ padding: 20, fontFamily: 'sans-serif' }}>
       <h1 style={{ fontSize: '1.5rem', marginBottom: 20 }}>Odds Movement</h1>
 
-      {/* Dropdown */}
+      {/* Team selection dropdown */}
       <label style={{ fontWeight: 'bold' }}>
         Select Team:{' '}
         <select
