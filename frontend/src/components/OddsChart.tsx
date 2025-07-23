@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '../utils/supabaseClient';
+import { supabase } from '../lib/supabaseClient';
 import {
   ResponsiveContainer,
   LineChart,
@@ -18,8 +18,7 @@ type OddsPoint = {
 };
 
 export default function OddsChart({ teamName }: { teamName: string }) {
-  const [data, setData] = useState<OddsPoint[]>([]);
-  const supabase = createClient();
+  const [data, setData] = useState<OddsPoint[]>([]);  
 
   useEffect(() => {
     async function fetchOdds() {
