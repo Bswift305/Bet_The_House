@@ -37,14 +37,15 @@ export default function HomePage() {
         return
       }
 
-      const uniqueTeams = Array.from(
-        new Set((data ?? []).map((entry: { team_name: string }) => entry.team_name))
-      )
+      const uniqueTeams: string[] = Array.from(
+  new Set(data.map((entry: any) => entry.team_name))
+)
 
-      setTeamNames(uniqueTeams)
-      if (uniqueTeams.length > 0) {
-        setSelectedTeam(uniqueTeams[0])
-      }
+setTeamNames(uniqueTeams)
+if (uniqueTeams.length > 0) {
+  setSelectedTeam(uniqueTeams[0])
+}
+
     }
 
     fetchTeams()
