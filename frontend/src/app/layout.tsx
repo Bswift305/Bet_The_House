@@ -1,5 +1,5 @@
 import './globals.css';
-import NavBar from '../components/NavBar';
+import Navbar from '../components/Navbar';
 
 export const metadata = {
   title: 'Bet The House',
@@ -10,7 +10,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="bg-gray-900 text-white font-sans min-h-screen">
-        <NavBar />
+        <Navbar />
         <main className="p-4 max-w-6xl mx-auto">{children}</main>
       </body>
     </html>

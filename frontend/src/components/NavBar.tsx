@@ -1,36 +1,28 @@
-'use client';
-
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { NavLink } from 'react-router-dom';
 
 const navItems = [
-  { name: 'Home', href: '/' },
-  { name: 'Odds', href: '/odds' },
-  { name: 'Stats', href: '/stats' },
-  { name: 'About', href: '/about' },
+  { name: 'Home', path: '/' },
+  { name: 'NFL', path: '/nfl' },
+  { name: 'NCAA', path: '/ncaa' },
+  { name: 'About', path: '/about' },
 ];
 
-export default function NavBar() {
-  const pathname = usePathname();
-
+export default function Navbar() {
   return (
-    <nav className="bg-black text-white shadow-md">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-red-600 tracking-wider">🏈 Bet The House</h1>
-        <div className="flex space-x-6">
-          {navItems.map(({ name, href }) => (
-            <Link
-              key={name}
-              href={href}
-              className={`hover:text-red-500 transition-colors ${
-                pathname === href ? 'text-red-500 font-semibold' : ''
-              }`}
-            >
-              {name}
-            </Link>
-          ))}
-        </div>
-      </div>
+    <nav className="bg-black text-white p-4 shadow-md flex space-x-6">
+      {navItems.map((item) => (
+        <NavLink
+          key={item.name}
+          to={item.path}
+          className={({ isActive }) =>
+            `text-lg font-semibold hover:text-red-500 transition ${
+              isActive ? 'text-red-500 underline' : ''
+            }`
+          }
+        >
+          {item.name}
+        </NavLink>
+      ))}
     </nav>
   );
 }

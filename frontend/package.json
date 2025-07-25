@@ -1,5 +1,5 @@
 {
-  "name": "betting-dashboard",
+  "name": "bet-the-house",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,6 +16,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-query": "^3.39.3",
+    "react-router-dom": "^7.7.0",
     "react-scripts": "5.0.1",
     "recharts": "^3.1.0",
     "socket.io-client": "^4.8.1",
@@ -49,7 +50,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.17"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "postcss.config.js",

@@ -1,18 +1,15 @@
-// src/index.tsx
-
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import './index.css'; // Tailwind CSS or other global styles
+import './index.css'; // Tailwind CSS entry
 
 const queryClient = new QueryClient();
 
-const rootElement = document.getElementById('root');
+const root = document.getElementById('root');
 
-if (rootElement) {
-  const root = ReactDOM.createRoot(rootElement);
-  root.render(
+if (root) {
+  ReactDOM.createRoot(root).render(
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <App />
@@ -20,5 +17,5 @@ if (rootElement) {
     </React.StrictMode>
   );
 } else {
-  console.error("Failed to find the root element to mount the app.");
+  console.error('Failed to find the root element.');
 }
