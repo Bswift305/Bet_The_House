@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
-import { fetchPlayerStats } from '../../supabase/queries/playerStats';
+import { fetchUserTracking } from '../../supabase/queries/UserTracking';
 
-export default function PlayerStatsWidget() {
-  const [stats, setStats] = useState<any[]>([]);
+export default function UserTrackingWidget() {
+  const [logs, setLogs] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = true;
     (async () => {
-      const data = await fetchPlayerStats();
+      const data = await fetchUserTracking();
       if (mounted) {
-        setStats(data);
+        setLogs(data);
         setLoading(false);
       }
     })();
@@ -21,14 +21,14 @@ export default function PlayerStatsWidget() {
 
   return (
     <div className="bg-gray-900 text-white p-4 rounded-lg shadow">
-      <h2 className="text-xl font-semibold mb-4">Player Stats</h2>
+      <h2 className="text-xl font-semibold mb-4">User Tracking</h2>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <ul>
-          {stats.map((row, i) => (
+          {logs.map((row, i) => (
             <li key={i} className="mb-2">
-              {row.player_name} - {row.team} - {row.stat_category}: {row.stat_value}
+              [{new Date(row.timestamp).toLocaleString()}] {row.user_id} - {row.action}
             </li>
           ))}
         </ul>
@@ -36,5 +36,3 @@ export default function PlayerStatsWidget() {
     </div>
   );
 }
-
-

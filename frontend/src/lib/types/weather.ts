@@ -1,4 +1,4 @@
-import { supabase } from '../../supabase/client';
+import { supabase } from '../client';
 
 export async function fetchWeather() {
   const { data, error } = await supabase
@@ -6,10 +6,9 @@ export async function fetchWeather() {
     .select('*');
 
   if (error) {
-    console.error('Error fetching weather data:', error);
+    console.error('Error fetching weather:', error.message);
     return [];
   }
 
-  return data;
+  return data || [];
 }
-

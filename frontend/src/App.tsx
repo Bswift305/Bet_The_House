@@ -1,28 +1,23 @@
 // src/App.tsx
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Home from './pages/Home'
-import NFLPage from './pages/NFLPage'
-import NCAAPage from './pages/NCAAPage'
-import AboutPage from './pages/AboutPage'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './layout';
+import Home from './pages/Home';
+import NFLPage from './pages/NFLPage';
+import NCAA from './pages/NCAA';
+import About from './pages/About';
 
-function App() {
+export default function App() {
   return (
-    <BrowserRouter>
-      <div className="min-h-screen bg-gray-900 text-white">
-        <Navbar />
-        <main className="max-w-6xl mx-auto p-4">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/nfl" element={<NFLPage />} />
-            <Route path="/ncaa" element={<NCAAPage />} />
-            <Route path="/about" element={<AboutPage />} />
-          </Routes>
-        </main>
-      </div>
-    </BrowserRouter>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="nfl" element={<NFLPage />} />
+          <Route path="ncaa" element={<NCAA />} />
+          <Route path="about" element={<About />} />
+        </Route>
+      </Routes>
+    </Router>
+  );
 }
 
-export default App

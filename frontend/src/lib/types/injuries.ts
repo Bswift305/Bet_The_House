@@ -1,4 +1,4 @@
-import { supabase } from '../../supabase/client';
+import { supabase } from '../client';
 
 export async function fetchInjuries() {
   const { data, error } = await supabase
@@ -6,9 +6,9 @@ export async function fetchInjuries() {
     .select('*');
 
   if (error) {
-    console.error('Error fetching injuries:', error);
+    console.error('Error fetching injuries:', error.message);
     return [];
   }
 
-  return data;
+  return data || [];
 }

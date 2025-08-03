@@ -1,4 +1,4 @@
-import { supabase } from '../../supabase/client';
+import { supabase } from '../client';
 
 export async function fetchGameScripts() {
   const { data, error } = await supabase
@@ -6,9 +6,10 @@ export async function fetchGameScripts() {
     .select('*');
 
   if (error) {
-    console.error('Error fetching game scripts:', error);
+    console.error('Error fetching game scripts:', error.message);
     return [];
   }
 
-  return data;
+  return data || [];
 }
+

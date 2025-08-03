@@ -1,28 +1,32 @@
-import { NavLink } from 'react-router-dom';
-
-const navItems = [
-  { name: 'Home', path: '/' },
-  { name: 'NFL', path: '/nfl' },
-  { name: 'NCAA', path: '/ncaa' },
-  { name: 'About', path: '/about' },
-];
+// src/components/Navbar.tsx
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
+  const navLinks = [
+    { to: "/", label: "Home" },
+    { to: "/nfl", label: "NFL" },
+    { to: "/ncaa", label: "NCAA" },
+    { to: "/about", label: "About" },
+  ];
+
   return (
-    <nav className="bg-black text-white p-4 shadow-md flex space-x-6">
-      {navItems.map((item) => (
-        <NavLink
-          key={item.name}
-          to={item.path}
-          className={({ isActive }) =>
-            `text-lg font-semibold hover:text-red-500 transition ${
-              isActive ? 'text-red-500 underline' : ''
-            }`
-          }
-        >
-          {item.name}
-        </NavLink>
-      ))}
+    <nav className="bg-gray-900 text-white shadow-lg px-6 py-4 flex justify-between items-center">
+      <h1 className="text-2xl font-bold text-red-500 tracking-wide">Bet The House</h1>
+      <div className="flex space-x-6">
+        {navLinks.map(({ to, label }) => (
+          <NavLink
+            key={to}
+            to={to}
+            className={({ isActive }) =>
+              `text-sm font-medium hover:text-red-400 transition ${
+                isActive ? "text-red-500 underline" : "text-gray-300"
+              }`
+            }
+          >
+            {label}
+          </NavLink>
+        ))}
+      </div>
     </nav>
   );
 }

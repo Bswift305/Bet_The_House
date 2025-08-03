@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
-import { fetchPlayerStats } from '../../supabase/queries/playerStats';
+import { fetchPowerRatings } from '../../supabase/queries/powerRatings';
 
-export default function PlayerStatsWidget() {
-  const [stats, setStats] = useState<any[]>([]);
+export default function PowerRatingsWidget() {
+  const [ratings, setRatings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let mounted = true;
     (async () => {
-      const data = await fetchPlayerStats();
+      const data = await fetchPowerRatings();
       if (mounted) {
-        setStats(data);
+        setRatings(data);
         setLoading(false);
       }
     })();
@@ -21,14 +21,14 @@ export default function PlayerStatsWidget() {
 
   return (
     <div className="bg-gray-900 text-white p-4 rounded-lg shadow">
-      <h2 className="text-xl font-semibold mb-4">Player Stats</h2>
+      <h2 className="text-xl font-semibold mb-4">Power Ratings</h2>
       {loading ? (
         <p>Loading...</p>
       ) : (
         <ul>
-          {stats.map((row, i) => (
+          {ratings.map((row, i) => (
             <li key={i} className="mb-2">
-              {row.player_name} - {row.team} - {row.stat_category}: {row.stat_value}
+              {row.team}: {row.rating}
             </li>
           ))}
         </ul>
@@ -36,5 +36,3 @@ export default function PlayerStatsWidget() {
     </div>
   );
 }
-
-

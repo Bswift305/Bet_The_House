@@ -1,4 +1,4 @@
-import { supabase } from '../../supabase/client';
+import { supabase } from '../client';
 
 export async function fetchPlayerStats() {
   const { data, error } = await supabase
@@ -6,10 +6,9 @@ export async function fetchPlayerStats() {
     .select('*');
 
   if (error) {
-    console.error('Error fetching player stats:', error);
+    console.error('Error fetching player stats:', error.message);
     return [];
   }
 
-  return data;
+  return data || [];
 }
-

@@ -1,4 +1,4 @@
-import { supabase } from '../../supabase/client';
+import { supabase } from '../client';
 
 export async function fetchPropsLines() {
   const { data, error } = await supabase
@@ -6,9 +6,11 @@ export async function fetchPropsLines() {
     .select('*');
 
   if (error) {
-    console.error('Error fetching props lines:', error);
+    console.error('Error fetching props lines:', error.message);
     return [];
   }
 
-  return data;
+  return data || [];
 }
+
+

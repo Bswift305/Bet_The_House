@@ -1,4 +1,4 @@
-import { supabase } from '../../supabase/client';
+import { supabase } from '../client';
 
 export async function fetchTeamMetrics() {
   const { data, error } = await supabase
@@ -6,9 +6,9 @@ export async function fetchTeamMetrics() {
     .select('*');
 
   if (error) {
-    console.error('Error fetching team metrics:', error);
+    console.error('Error fetching team metrics:', error.message);
     return [];
   }
 
-  return data;
+  return data || [];
 }
