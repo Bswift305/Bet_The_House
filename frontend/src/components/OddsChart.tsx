@@ -1,4 +1,3 @@
-// src/components/OddsChart.tsx
 import React from 'react';
 
 export default function OddsChart() {

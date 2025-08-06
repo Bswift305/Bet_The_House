@@ -1,38 +1,22 @@
 import { useEffect, useState } from 'react';
-import { fetchUserTracking } from '../../supabase/queries/UserTracking';
+import { fetchUserTracking } from '../../lib/supabase/fetchUserTracking';
+import { UserTrackingRow } from '../../lib/types/user_tracking';
 
 export default function UserTrackingWidget() {
-  const [logs, setLogs] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [logs, setLogs] = useState<UserTrackingRow[]>([]);
 
   useEffect(() => {
-    let mounted = true;
-    (async () => {
-      const data = await fetchUserTracking();
-      if (mounted) {
-        setLogs(data);
-        setLoading(false);
-      }
-    })();
-    return () => {
-      mounted = false;
-    };
+    fetchUserTracking().then(setLogs);
   }, []);
 
   return (
-    <div className="bg-gray-900 text-white p-4 rounded-lg shadow">
-      <h2 className="text-xl font-semibold mb-4">User Tracking</h2>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <ul>
-          {logs.map((row, i) => (
-            <li key={i} className="mb-2">
-              [{new Date(row.timestamp).toLocaleString()}] {row.user_id} - {row.action}
-            </li>
-          ))}
-        </ul>
-      )}
+    <div>
+      <h2>User Tracking</h2>
+      <ul>
+        {logs.map((log, i) => (
+          <li key={i}>{JSON.stringify(log)}</li>
+        ))}
+      </ul>
     </div>
   );
 }

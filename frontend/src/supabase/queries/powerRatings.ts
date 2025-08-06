@@ -1,5 +1,4 @@
-// src/supabase/queries/powerRatings.ts
-import { supabase } from '../client';
+import { supabase } from '../../supabase/client'; // from within lib
 
 export async function fetchPowerRatings() {
   const { data, error } = await supabase
