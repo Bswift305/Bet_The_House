@@ -1,14 +1,9 @@
-import { supabase } from '../client';
-
-export async function fetchTeamMetrics() {
-  const { data, error } = await supabase
-    .from('team_metrics')
-    .select('*');
-
-  if (error) {
-    console.error('Error fetching team metrics:', error.message);
-    return [];
-  }
-
-  return data || [];
+// team_metrics.ts
+export interface TeamMetricsRow {
+  id: number;
+  team: string;
+  offense_rating: number;
+  defense_rating: number;
+  updated_at: string;
 }
+

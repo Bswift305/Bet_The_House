@@ -1,14 +1,9 @@
-import { supabase } from '../client';
-
-export async function fetchWeather() {
-  const { data, error } = await supabase
-    .from('weather')
-    .select('*');
-
-  if (error) {
-    console.error('Error fetching weather:', error.message);
-    return [];
-  }
-
-  return data || [];
+// weather.ts
+export interface WeatherRow {
+  id: number;
+  game_id: string;
+  condition: string;
+  temperature: number;
+  wind_speed: number;
 }
+

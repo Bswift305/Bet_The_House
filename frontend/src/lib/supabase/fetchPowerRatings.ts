@@ -1,16 +1,14 @@
-import { supabase } from '../client';
+// fetchPowerRatings.ts
+import { supabase } from '../../supabase/client';
 import { PowerRatingRow } from '../types/power_ratings';
 
 export async function fetchPowerRatings(): Promise<PowerRatingRow[]> {
-  const { data, error } = await supabase
-    .from('power_ratings')
-    .select('*');
-
+  const { data, error } = await supabase.from('power_ratings').select('*');
   if (error) {
-    console.error('Error fetching power ratings:', error.message);
+    console.error('Error fetching power ratings:', error);
     return [];
   }
-
-  return (data ?? []) as PowerRatingRow[];
+  return data as PowerRatingRow[];
 }
+
 

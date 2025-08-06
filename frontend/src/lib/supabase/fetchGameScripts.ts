@@ -1,15 +1,11 @@
-import { supabase } from '../client';
+import { supabase } from '../../supabase/client'; // from within lib
 import { GameScriptRow } from '../types/game_scripts';
 
-export async function fetchGameScripts(): Promise<GameScriptRow[]> {
-  const { data, error } = await supabase
-    .from('game_scripts')
-    .select('*');
-
-  if (error) {
-    console.error('Error fetching game scripts:', error.message);
-    return [];
-  }
+export interface GameScriptRow {
+  id: number;
+  game_id: string;
+  script: string;
+}
 
   return (data ?? []) as GameScriptRow[];
 }

@@ -1,16 +1,13 @@
+// fetchConsensusBetting.ts
 import { supabase } from '../../supabase/client';
 import { ConsensusBettingRow } from '../types/consensus_betting';
 
 export async function fetchConsensusBetting(): Promise<ConsensusBettingRow[]> {
-  const { data, error } = await supabase
-    .from('consensus_betting')
-    .select('*')
-    .order('updated_at', { ascending: false });
-
+  const { data, error } = await supabase.from('consensus_betting').select('*');
   if (error) {
-    console.error('Error fetching consensus betting data:', error.message);
+    console.error('Error fetching consensus betting:', error);
     return [];
   }
-
-  return data ?? [];
+  return data as ConsensusBettingRow[];
 }
+

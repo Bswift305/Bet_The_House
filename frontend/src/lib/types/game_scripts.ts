@@ -1,15 +1,9 @@
-import { supabase } from '../client';
-
-export async function fetchGameScripts() {
-  const { data, error } = await supabase
-    .from('game_scripts')
-    .select('*');
-
-  if (error) {
-    console.error('Error fetching game scripts:', error.message);
-    return [];
-  }
-
-  return data || [];
+// game_scripts.ts
+export interface GameScriptRow {
+  id: number;
+  game_id: string;
+  team: string;
+  script: string;
 }
+
 

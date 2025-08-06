@@ -1,14 +1,9 @@
-import { supabase } from '../client';
-
-export async function fetchInjuries() {
-  const { data, error } = await supabase
-    .from('injuries')
-    .select('*');
-
-  if (error) {
-    console.error('Error fetching injuries:', error.message);
-    return [];
-  }
-
-  return data || [];
+// injuries.ts
+export interface InjuryRow {
+  id: number;
+  player: string;
+  team: string;
+  status: string;
+  report_date: string;
 }
+

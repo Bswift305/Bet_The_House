@@ -1,16 +1,11 @@
-import { supabase } from '../client';
-
-export async function fetchPropsLines() {
-  const { data, error } = await supabase
-    .from('props_lines')
-    .select('*');
-
-  if (error) {
-    console.error('Error fetching props lines:', error.message);
-    return [];
-  }
-
-  return data || [];
+// props_lines.ts
+export interface PropsLineRow {
+  id: number;
+  player: string;
+  stat: string;
+  line: number;
+  game_id: string;
 }
+
 
 

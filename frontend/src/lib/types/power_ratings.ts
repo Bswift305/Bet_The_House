@@ -1,14 +1,9 @@
-import { supabase } from '../client';
-
-export async function fetchPowerRatings() {
-  const { data, error } = await supabase
-    .from('power_ratings')
-    .select('*');
-
-  if (error) {
-    console.error('Error fetching power ratings:', error.message);
-    return [];
-  }
-
-  return data || [];
+// power_ratings.ts
+export interface PowerRatingRow {
+  id: number;
+  team: string;
+  rating: number;
+  updated_at: string;
 }
+
+
