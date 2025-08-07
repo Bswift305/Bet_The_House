@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import fetchPowerRatings from '@/lib/supabase/fetchPowerRatings';
 
-const PowerRatingsWidget = () => {
+const PowerRatingsHealthCheck = () => {
   const [ratings, setRatings] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const load = async () => {
       const data = await fetchPowerRatings();
-      console.log('Fetched Power Ratings:', data);
+      console.log('Power Ratings Health Check:', data);
       setRatings(data);
       setLoading(false);
     };
@@ -20,10 +20,10 @@ const PowerRatingsWidget = () => {
 
   return (
     <div>
-      <h2>Power Ratings</h2>
+      <h2>Health Check: Power Ratings</h2>
       <pre>{JSON.stringify(ratings, null, 2)}</pre>
     </div>
   );
 };
 
-export default PowerRatingsWidget;
+export default PowerRatingsHealthCheck;

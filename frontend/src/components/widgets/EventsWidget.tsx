@@ -1,47 +1,29 @@
-import { useEffect, useState } from 'react';
-import { supabase } from '../../supabase/client';
+import React, { useEffect, useState } from 'react';
+import fetchEvents from '@/lib/supabase/fetchEvents';
 
-interface EventRow {
-  id: number;
-  name: string;
-  dateIso: string;
-}
-
-export default function EventsWidget() {
-  const [events, setEvents] = useState<EventRow[]>([]);
+const EventsWidget = () => {
+  const [events, setEvents] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let mounted = true;
-    (async () => {
-      const { data, error } = await supabase.from('events').select('*');
-      if (!mounted) return;
-      if (error) {
-        console.error(error.message);
-        setEvents([]);
-      } else {
-        const sorted = (data ?? []).sort((a, b) => new Date(a.dateIso).getTime() - new Date(b.dateIso).getTime());
-        setEvents(sorted);
-      }
+    const load = async () => {
+      const data = await fetchEvents();
+      console.log('Fetched Events:', data);
+      setEvents(data);
       setLoading(false);
-    })();
-    return () => {
-      mounted = false;
     };
+    load();
   }, []);
 
+  if (loading) return <p>Loading events...</p>;
+  if (!events || events.length === 0) return <p>No events found.</p>;
+
   return (
-    <div className="bg-gray-900 p-4 rounded-xl shadow-md text-white">
-      <h2 className="text-xl font-bold mb-4">Upcoming Events</h2>
-      {loading ? <p>Loading...</p> : (
-        <ul className="space-y-2">
-          {events.map((e) => (
-            <li key={e.id} className="bg-gray-800 p-2 rounded">
-              {e.name} — {new Date(e.dateIso).toLocaleDateString()}
-            </li>
-          ))}
-        </ul>
-      )}
+    <div>
+      <h2>Events</h2>
+      <pre>{JSON.stringify(events, null, 2)}</pre>
     </div>
   );
-}
+};
+
+export default EventsWidget;

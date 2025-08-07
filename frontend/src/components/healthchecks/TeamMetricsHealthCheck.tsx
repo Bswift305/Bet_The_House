@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import fetchTeamMetrics from '@/lib/supabase/fetchTeamMetrics';
 
-const TeamMetricsWidget = () => {
+const TeamMetricsHealthCheck = () => {
   const [metrics, setMetrics] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const load = async () => {
       const data = await fetchTeamMetrics();
-      console.log('Fetched Team Metrics:', data);
+      console.log('Team Metrics Health Check:', data);
       setMetrics(data);
       setLoading(false);
     };
@@ -20,10 +20,10 @@ const TeamMetricsWidget = () => {
 
   return (
     <div>
-      <h2>Team Metrics</h2>
+      <h2>Health Check: Team Metrics</h2>
       <pre>{JSON.stringify(metrics, null, 2)}</pre>
     </div>
   );
 };
 
-export default TeamMetricsWidget;
+export default TeamMetricsHealthCheck;

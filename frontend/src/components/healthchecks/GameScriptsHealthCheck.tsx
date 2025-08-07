@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import fetchGameScripts from '@/lib/supabase/fetchGameScripts';
 
-const GameScriptsWidget = () => {
+const GameScriptsHealthCheck = () => {
   const [scripts, setScripts] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const load = async () => {
       const data = await fetchGameScripts();
-      console.log('Fetched Game Scripts:', data);
+      console.log('Game Scripts Health Check:', data);
       setScripts(data);
       setLoading(false);
     };
@@ -20,10 +20,10 @@ const GameScriptsWidget = () => {
 
   return (
     <div>
-      <h2>Game Scripts</h2>
+      <h2>Health Check: Game Scripts</h2>
       <pre>{JSON.stringify(scripts, null, 2)}</pre>
     </div>
   );
 };
 
-export default GameScriptsWidget;
+export default GameScriptsHealthCheck;

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import fetchPlayerStats from '@/lib/supabase/fetchPlayerStats';
 
-const PlayerStatsWidget = () => {
+const PlayerStatsHealthCheck = () => {
   const [stats, setStats] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const load = async () => {
       const data = await fetchPlayerStats();
-      console.log('Fetched Player Stats:', data);
+      console.log('Player Stats Health Check:', data);
       setStats(data);
       setLoading(false);
     };
@@ -20,12 +20,10 @@ const PlayerStatsWidget = () => {
 
   return (
     <div>
-      <h2>Player Stats</h2>
+      <h2>Health Check: Player Stats</h2>
       <pre>{JSON.stringify(stats, null, 2)}</pre>
     </div>
   );
 };
 
-export default PlayerStatsWidget;
-
-
+export default PlayerStatsHealthCheck;

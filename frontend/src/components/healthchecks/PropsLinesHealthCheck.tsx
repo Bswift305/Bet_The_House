@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import fetchPropsLines from '@/lib/supabase/fetchPropsLines';
 
-const PropsLinesWidget = () => {
+const PropsLinesHealthCheck = () => {
   const [lines, setLines] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const load = async () => {
       const data = await fetchPropsLines();
-      console.log('Fetched Props Lines:', data);
+      console.log('Props Lines Health Check:', data);
       setLines(data);
       setLoading(false);
     };
@@ -20,10 +20,10 @@ const PropsLinesWidget = () => {
 
   return (
     <div>
-      <h2>Props Lines</h2>
+      <h2>Health Check: Props Lines</h2>
       <pre>{JSON.stringify(lines, null, 2)}</pre>
     </div>
   );
 };
 
-export default PropsLinesWidget;
+export default PropsLinesHealthCheck;

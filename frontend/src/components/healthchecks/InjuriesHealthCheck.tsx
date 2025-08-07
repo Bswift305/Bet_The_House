@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import fetchInjuries from '@/lib/supabase/fetchInjuries';
 
-const InjuriesWidget = () => {
+const InjuriesHealthCheck = () => {
   const [injuries, setInjuries] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const load = async () => {
       const data = await fetchInjuries();
-      console.log('Fetched Injuries:', data);
+      console.log('Injuries Health Check:', data);
       setInjuries(data);
       setLoading(false);
     };
@@ -16,14 +16,14 @@ const InjuriesWidget = () => {
   }, []);
 
   if (loading) return <p>Loading injuries...</p>;
-  if (!injuries || injuries.length === 0) return <p>No injuries found.</p>;
+  if (!injuries || injuries.length === 0) return <p>No injury data found.</p>;
 
   return (
     <div>
-      <h2>Injuries</h2>
+      <h2>Health Check: Injuries</h2>
       <pre>{JSON.stringify(injuries, null, 2)}</pre>
     </div>
   );
 };
 
-export default InjuriesWidget;
+export default InjuriesHealthCheck;
