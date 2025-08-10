@@ -13,3 +13,5 @@ A frontend betting dashboard application built with React and TypeScript.
 ```bash
 npm install
 npm run dev
+
+Deployed via Vercel – <today’s date> → Commit to main.
